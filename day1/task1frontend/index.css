@@ -1,0 +1,21 @@
+#border-box{
+    background-color: 4px solid black;
+    padding:2px;
+    width:98%;
+    height: auto;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+#display-box{
+    height: 95%;
+    width: 95%;
+    margin:auto;
+    
+    margin-top:60px;
+    background-color: black;
+}
+
+#display-box>div p{
+   color: white;
+}

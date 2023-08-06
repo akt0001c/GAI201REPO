@@ -1,0 +1,50 @@
+body{
+    background-color: green;
+}
+
+h1{
+    text-align: center;
+    color:wheat;
+}
+#main{
+    width:60%;
+    margin:auto;
+    margin-top: 50px;
+    border:5px solid white;
+    height: 600px;
+    overflow:auto;
+}
+
+#input-container{
+    margin:auto;
+    width:50%;
+    padding:5px;
+    display: flex;
+    justify-content:space-evenly
+}
+
+#input-container input{
+    font-size: 20px;
+    padding:5px;
+    border-radius: 5px;
+}
+
+#input-container button{
+    font-size: 20px;
+}
+
+#input-container p{
+    color:whitesmoke;
+}
+
+#output-box{
+    
+    width:100%;
+    padding:5px;
+    
+}
+
+.main_content{
+    color:whitesmoke;
+    font-size: 35px;
+}
