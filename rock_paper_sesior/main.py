@@ -47,7 +47,7 @@ def startGame():
         draws +=1
         round +=1
         startGame()
-    elif((user_choice==list1[0] and comp_choice==list1[2]) or (user_choice==list1[1] and comp_choice==list1[0]) ):
+    elif((user_choice==list1[0] and comp_choice==list1[2]) or (user_choice==list1[1] and comp_choice==list1[0]) or(user_choice==list1[2] and comp_choice==list1[1]) ):
         print("********************************")
         print("User has won this round")
         print("********************************")
