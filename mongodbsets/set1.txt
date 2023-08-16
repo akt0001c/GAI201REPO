@@ -1,0 +1,86 @@
+
+q1::Create a Customers table / collection with the following fields: id (unique identifier), name, email, address, and phone_number.
+Ans:  
+  use mydb 
+
+ob={
+    "name":"Ankit",
+    "email":"ankit123@gmail.com",
+    "address":"address1",
+    "phone":"1234567897"
+}
+
+mydb.Customer.insertOne(ob)
+
+q2:: insert five rows / documents into the Customers table / collection with data of your choice.
+Ans:: myob.Customer.insertMany([
+    {
+       "name":"Ankit",
+    "email":"ankit123@gmail.com",
+    "address":"address1",
+    "phone":"1234567897" 
+    },
+    {
+        "name":"Aman",
+    "email":"aman123@gmail.com",
+    "address":"address2",
+    "phone":"1234567897"
+    },
+    {
+        "name":"Arun",
+        "email":"arun123@gmail.com",
+        "address":"address3",
+        "phone":"1234547897"
+    },
+    {
+        "name":"shubham",
+    "email":"shubham123@gmail.com",
+    "address":"address4",
+    "phone":"1233567897"
+    },
+    {
+        "name":"kamal",
+    "email":"kamal123@gmail.com",
+    "address":"address5",
+    "phone":"1834567897"
+    }
+])
+
+q3::  Write a query to fetch all data from the Customers table / collection.
+Ans:: mydb.Customer.find()
+
+q4:: Write a query to select only the name and email fields for all customers.
+Ans:: mydb.Customer.find({},{"name":1,"email":1})
+
+q5:: Write a query to fetch the customer with the id of 3.
+Ans:: mydb.Customer.findOne({"id":3})
+
+q6:: Write a query to fetch all customers whose name starts with 'A'.
+Ans:: mydb.Customer.findOne({"name":{$regex:/^A/}})
+
+q7:: Write a query to fetch all customers, ordered by name in descending order.
+Ans:: mydb.Customer.find().sort({"name":-1})
+
+q8::Write a query to update the address of the customer with id 4.
+Ans:: mydb.Customer.updateOne({"name":"Arun"},{$set:{"address":"newAddress"}})
+
+q9:: Write a query to fetch the top 3 customers when ordered by id in ascending order.
+Ans:: mydb.Customer.find().sort({"_id":1}).limit(3)
+
+q10:: Write a query to delete the customer with id 2.
+Ans:: mydb.Customer.deleteOne({"_id":2})
+
+q11::  Write a query to count the number of customers.
+Ans:: mydb.Customer.count()
+
+q12:: Write a query to fetch all customers except the first two when ordered by id in ascending order.
+Ans:: mydb.Customer.find().sort({"_id":1}).skip(2)
+
+q13:: Write a query to fetch all customers whose id is greater than 2 and name starts with 'B'.
+Ans:: mydb.Customer.find({"_id":{$gt:2},"name":{$regex:'^B'}})
+
+q14:: Write a query to fetch all customers whose id is less than 3 or name ends with 's'.
+Ans:: mydb.Customer.find({$or:[{"_id":{$lt:3}},{"name":{$regex:'s$'}}]})
+
+q15:: Write a query to fetch all customers where the phone_number field is not set or is null.
+Ans:: mydb.Customer.find({"phone_number":null})
