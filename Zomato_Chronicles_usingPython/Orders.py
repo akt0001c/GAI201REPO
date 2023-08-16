@@ -1,5 +1,5 @@
 from Dishes import Dishes
-from MenuOperations import MenuOperations
+from DishMenu import DishMenu
 
 class Orders:
     orderId=100;
@@ -11,7 +11,7 @@ class Orders:
 
 
     def __str__(self):
-          return f" Order id : {self.id} , Ordered by : {self.customer_name}, Ordered dishes : {self.Ordered_dishes} ,Order Status : {self.status},"
+          return f" Order id : {self.id} , Ordered by : {self.customer_name} ,Order Status : {self.status},"
     
 
     def addDish(self,dish):
@@ -23,6 +23,7 @@ class Orders:
     def calculatePrice(self):
         total_price=0
         for dish in self.Ordered_dishes:
+            print(f" {dish.name} : {dish.price}")
             total_price= total_price + dish.price
 
         return total_price;
@@ -34,9 +35,9 @@ class Orders:
         
         
         for dishId in dish_id_list:
-            if dishId in MenuOperations.DishMenu:
-                dish= MenuOperations.DishMenu[dishId]
-                if(dish.available==True):
+            if dishId in DishMenu.dishMenu:
+                dish= DishMenu.dishMenu[dishId]
+                if(dish.available=="Yes"):
                     order.addDish(dish)
                 else:
                     print(f" {dish.name}  is not available")

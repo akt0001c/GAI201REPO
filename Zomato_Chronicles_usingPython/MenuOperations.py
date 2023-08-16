@@ -1,27 +1,35 @@
 from Dishes import Dishes
 from Orders import Orders
+from DishMenu import DishMenu
+import os
 import pickle
 
 
+    
+
 class MenuOperations:
     orders_list=[]
-    DishMenu={
-      1:Dishes(1,"Palak Panner",100,"Yes"),
-      2:Dishes(2,"dal-Rice",200,"Yes"),
-      3:Dishes(3,"Roti",10,"Yes"),
-      4:Dishes(4,"shahi panner",150,"Yes"),
-      5:Dishes(5,"Malai kophta",50,"Yes") 
-       }
-    
+
     @staticmethod
     def addDishes():
-        id= int(input("Enter new dish id :"))
+        dishid= int(input("Enter new dish id :"))
         name= input("Enter dish name :")
         price= int(input("Enter dish price :"))
-        ob= Dishes(id,name,price,"Yes")
-        MenuOperations.DishMenu[ob.id]=ob;
+        ob= Dishes(dishid,name,price,"Yes")
+        DishMenu.dishMenu[ob.id]=ob;
         print("Dish added sucessfully")
         return
+    
+    @staticmethod
+    def removeDish(dishid):
+        dishid= int(dishid)
+        if dishid in DishMenu.dishMenu:
+            del DishMenu.dishMenu[dishid]
+            print("Dish removed successfully")
+        else:
+            print("Dish is not present in the menu")
+            
+
 
     @staticmethod
     def takeOrder():
@@ -29,7 +37,8 @@ class MenuOperations:
         dishList= [ int(id) for id in  input("Enter dishes id which are seperated with commas :").split(',')]
         OrderOb= Orders.takeOrder(customer_name,dishList)
         MenuOperations.orders_list.append(OrderOb)
-        return;
+        print("Order placed Sucessfully")
+        return ;
 
     @staticmethod
     def updateOrderStatus():
@@ -52,10 +61,12 @@ class MenuOperations:
                 print(order)
                 total_Bill= order.calculatePrice()
                 print(f"Tota Bill amount for this order : {total_Bill}")
+            else:
+                print("Orders not Found for particular status")
         
     @staticmethod
     def saveData(fileName):
-        data= (MenuOperations.DishMenu,MenuOperations.orders_list)
+        data= (DishMenu.dishMenu,MenuOperations.orders_list)
         with open(fileName,"wb") as file:
             pickle.dump(data,file)
         print("Data saved sucessfully")
@@ -65,10 +76,13 @@ class MenuOperations:
     @staticmethod
     def loadData(fileName):
         try:
-            with open(fileName,"rb") as file:
-                  data= pickle.loads(file)
-                  MenuOperations.DishMenu,MenuOperations.orders_list=data
+            if(os.path.exists(fileName)  and os.path.getsize(fileName)>0):
+                with open(fileName,"rb") as file:
+                  data= pickle.load(file)
+                  DishMenu.dishMenu,MenuOperations.orders_list=data
                   print("Data loaded sucessfully")
+            else:
+                print("File not found or empty")
      
         except FileNotFoundError:
             print("Data file not found")
