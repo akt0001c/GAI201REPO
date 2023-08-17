@@ -1,0 +1,126 @@
+ob={
+  "_id": ObjectId(),
+  "driver_id": ObjectId(),
+  "passenger_id": ObjectId(),
+  "start_location": String,
+  "end_location": String,
+  "distance": Number,
+  "ride_time": Number,
+  "fare": Number
+}
+
+
+q1:: Create a Rides table / collection with the fields defined above.
+Ans:: db.Rides.insertOne({
+  "_id": ObjectId(),
+  "driver_id": 100,
+  "passenger_id": 400,
+  "start_location": "Delhi",
+  "end_location": "Mumbai",
+  "distance": 200,
+  "ride_time": 12,
+  "fare": 1000
+})
+
+q2:: Insert five rows / documents into the Rides table / collection with data of your choice.
+Ans:: db.Rides.insertMany([{
+  "_id": ObjectId(),
+  "driver_id": 100,
+  "passenger_id": 400,
+  "start_location": "Delhi",
+  "end_location": "Mumbai",
+  "distance": 300,
+  "ride_time": 12,
+  "fare": 1000
+},
+{
+  "_id": ObjectId(),
+  "driver_id": 101,
+  "passenger_id": 401,
+  "start_location": "Delhi",
+  "end_location": "Mumbai",
+  "distance": 400,
+  "ride_time": 12,
+  "fare": 1000  
+},
+{
+    "_id": ObjectId(),
+  "driver_id": 102,
+  "passenger_id": 402,
+  "start_location": "Delhi",
+  "end_location": "Mumbai",
+  "distance": 500,
+  "ride_time": 12,
+  "fare": 1000
+},
+{
+    "_id": ObjectId(),
+  "driver_id": 103,
+  "passenger_id": 403,
+  "start_location": "Delhi",
+  "end_location": "Mumbai",
+  "distance": 600,
+  "ride_time": 12,
+  "fare": 1000
+},
+{
+    "_id": ObjectId(),
+  "driver_id": 104,
+  "passenger_id": 404,
+  "start_location": "Delhi",
+  "end_location": "Mumbai",
+  "distance": 700,
+  "ride_time": 12,
+  "fare": 1000
+}
+])
+
+q3:: Write a query to fetch all rides, ordered by fare in descending order.
+Ans:: db.Rides.find().sort({"fare":-1})
+
+q4::Write a query to calculate the total distance and total fare for all rides.
+Ans:: db.Rides.aggregate([
+    {
+        $group:{
+            _id:null,
+            total_distance:{$sum:"$distance"},
+            total_fare:{$sum:"$fare"}
+        }
+    }
+])
+
+q4:: Write a query to calculate the average ride_time of all rides.
+Ans:: db.Rides.aggregate(
+    [
+        {
+            $group:{
+                _id:null,
+                average_ride_time:{$avg:"$ride_time"}
+            }
+        }
+    ]
+)
+
+q5:: Write a query to fetch all rides whose start_location or end_location contains 'Downtown'.
+Ans:: db.Rides.find({$or:[{"start_location":{ $regex:/Downtown/i}},{"end_location":{$regex:/Downtown/i}}]})
+
+q6:: Write a query to count the number of rides for a given driver_id.
+Ans:: db.Rides.count({"driver_id":4})
+
+q7:: Write a query to update the fare of the ride with id 4.
+Ans:: db.Rides.updateOne({_id:4},{$set :{"fare":1200}}) 
+
+q8::Write a query to calculate the total fare for each driver_id
+Ans:: db.Rides.aggregate(
+    [
+        {
+            $group:{
+                _id:"$driver_id",
+                total_fare:{ $sum :"$fare" }
+            }
+        }
+    ]
+)
+
+q9:: Write a query to delete the ride with id 2.
+Ans:: db.Rides.deleteOne({"_id":2})
