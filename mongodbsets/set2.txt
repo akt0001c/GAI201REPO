@@ -1,0 +1,62 @@
+ob={ 
+  "name": String,
+  "cuisine_type": String,
+  "location": String,
+  "average_rating": Number,
+  "delivery_available": Boolean
+}
+
+q1:: Create a Restaurants table / collection with the fields defined above.
+Ans:: db.Restaurant.insertOne(ob)
+
+q2::  Insert five rows / documents into the Restaurants table / collection with data of your choice.
+Ans:: db.Restaurant.insertMany([
+    { 
+  "name": "abc",
+  "cuisine_type":"italian" ,
+  "location": "Mumbai",
+  "average_rating": 4.5,
+  "delivery_available": true
+},
+{ 
+  "name": "def",
+  "cuisine_type":"Chiniese" ,
+  "location": "Delhi",
+  "average_rating": 3.5,
+  "delivery_available": false
+}
+
+])
+
+q3:: Write a query to fetch all restaurants, ordered by average_rating in descending order.
+Ans:: db.Restaurant.find().sort({"average_rating":-1})
+
+q4:: Write a query to fetch all restaurants that offer delivery_available and have an average_rating of more than 4.
+Ans:: db.Restaurant.find({"delivery_available":true,"average_rating":{$gt:4}})
+
+q5:: Write a query to fetch all restaurants where the cuisine_type field is not set or is null.
+Ans:: db.Restaurant.find({"cuisine_type":null})
+
+q6:: Write a query to count the number of restaurants that have delivery_available.
+Ans:: db.Restaurant.count({"delivery_available":true})
+
+q6:: Write a query to fetch all restaurants whose location contains 'New York'.
+Ans:: db.Restaurant.find({"location":{$regex:/New York/i}})
+
+q7:: Write a query to calculate the average average_rating of all restaurants
+Ans:: db.Restuarant.aggregate(
+    
+        {
+            $group :{
+                _id:null,
+                avgRating: {$avg: '$average_rating'}
+            }
+        }
+    
+)
+
+q8::Write a query to fetch the top 5 restaurants when ordered by average_rating in descending order.
+Ans:: db.Restaurant.sort({"average_rating":-1}).limit(5)
+
+q9:: Write a query to delete the restaurant with id 3.
+Ans:: db.Restaurant.deleteOne({_id:3})
