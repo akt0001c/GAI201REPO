@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>update form</title>
+</head>
+<body>
+    <form method="post" action="/update/">
+        {% csrf_token %}
+        <label for="key">Key to update:</label>
+        <input type="text" name="key" id="key">
+        <br>
+        <label for="value">New value:</label>
+        <input type="text" name="value" id="value">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>If you want to creae data click here <a href="/create/">Create</a></h2>
+</body>
+</html>

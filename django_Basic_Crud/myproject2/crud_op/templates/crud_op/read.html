@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Data</title>
+</head>
+<body>
+    <h1> All Data</h1>
+    <ul>
+        {% for key,value in  data.items %}
+        <li>{{key}}: {{value}}</li>
+        {% endfor %}
+    </ul>
+    <h2>If you want to update data click here <a href="/update/">update</a></h2>
+</body>
+</html>
