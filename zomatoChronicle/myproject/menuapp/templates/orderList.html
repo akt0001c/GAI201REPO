@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+</head>
+<body>
+    <h1>List of Orders</h1>
+    <ul>
+        {% for order in orders %}
+            <li>
+                Customer: {{ order.customer_name }}
+                <br>
+                Dishes: {% for dish in order.dishes.all %}{{ dish.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>For back to the main menu <a href="{% url 'menuapp:dishesList' %}">click here</a></h2>
+</body>
+</html>

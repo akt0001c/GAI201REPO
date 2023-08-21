@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> All the available Dishes: </h1>
+    <ol>
+        {% for dish in alldishes %}
+         {% if dish.available %}
+           <li> {{dish}}  For update: <a href="{% url 'menuapp:updateDish' dish.id %}">update</a> , For Delete: <a href="{% url 'menuapp:deleteDish' dish.id %}">Delete</a></li>
+          {%endif%}
+        {% endfor %}
+    </ol>
+
+    <h2>For add a new dish click here <a href="{% url 'menuapp:addDish' %}">click here</a></h2>
+    <h2>For placing an order click here <a href="{% url 'menuapp:placeOrder' %}">click here</a></h2>
+    <h2>Show all Orders <a href="{% url 'menuapp:showOrders' %}" >click here</a></h2>
+</body>
+</html>
